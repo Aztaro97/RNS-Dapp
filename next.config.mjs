@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+	domains: ["i.pravatar.cc"]
+  }
 }
 
 export default nextConfig
