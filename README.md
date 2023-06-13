@@ -1,1 +1,1 @@
-## ENS Dapp
+## RNS Dapp
