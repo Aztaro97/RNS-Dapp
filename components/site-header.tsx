@@ -7,7 +7,7 @@ import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 import UserAvatar from "./userAvatar"
-import NavShoppingCart from "./navCart"
+import NavShoppingCart from "./navShoppingCart"
 
 export function SiteHeader() {
   return (
