@@ -2,23 +2,26 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
+import ConnectWallet from "@/components/connectWallet"
 import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
+import NavShoppingCart from "@/components/navShoppingCart"
+import SearchInput from "@/components/searchInput"
 import { ThemeToggle } from "@/components/theme-toggle"
-
-import UserAvatar from "./userAvatar"
-import NavShoppingCart from "./navShoppingCart"
+import UserAvatar from "@/components/userAvatar"
 
 export function SiteHeader() {
+  const isAuth: boolean = true
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+      <div className="container flex items-center h-16 space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex items-center justify-end flex-1 space-x-4">
           <nav className="flex items-center space-x-2">
+            <SearchInput />
+            {isAuth ? <UserAvatar /> : <ConnectWallet />}
+            <NavShoppingCart />
             <ThemeToggle />
-            <UserAvatar />
-			<NavShoppingCart />
           </nav>
         </div>
       </div>

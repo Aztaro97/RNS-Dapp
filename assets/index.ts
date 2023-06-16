@@ -1,0 +1,1 @@
+export { default as BannerSvg } from "@/assets/svgs/banner-svg.svg"
