@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { useAccount } from "wagmi"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
@@ -11,7 +14,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import UserAvatar from "@/components/userAvatar"
 
 export function SiteHeader() {
-  const isAuth: boolean = true
+  const { isConnected } = useAccount()
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex items-center h-16 space-x-4 sm:justify-between sm:space-x-0">
@@ -19,7 +22,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-end flex-1 space-x-4">
           <nav className="flex items-center space-x-2">
             <SearchInput />
-            {isAuth ? <UserAvatar /> : <ConnectWallet />}
+            {isConnected ? <UserAvatar /> : <ConnectWallet />}
             <NavShoppingCart />
             <ThemeToggle />
           </nav>

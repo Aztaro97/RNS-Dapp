@@ -10,6 +10,7 @@ import { z } from "zod"
 import { siteConfig } from "@/config/site"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import SearchInputResult from "@/components/searchInput/searchInputResult"
 
 export default function IndexPage() {
   return (
@@ -26,7 +27,7 @@ export default function IndexPage() {
           <SearchInputForm />
         </div>
         <Image
-          className="order-first lg:order-last"
+          className="order-first hidden lg:order-last lg:block"
           src={BannerSvg}
           width={800}
           height={800}
@@ -60,12 +61,16 @@ const SearchInputForm = () => {
           type="text"
           placeholder="Search Domain Name"
           autoCapitalize="none"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck="false"
         />
         <Button type="submit">Submit</Button>
       </div>
       {errors?.name && (
         <p className="text-red-400 font-extralight">{errors.name.message}</p>
       )}
+      <SearchInputResult />
     </form>
   )
 }
