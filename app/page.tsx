@@ -14,7 +14,7 @@ import SearchInputResult from "@/components/searchInput/searchInputResult"
 
 export default function IndexPage() {
   return (
-    <section className="container py-20">
+    <section className="py-20">
       <div className="flex flex-col items-center justify-between gap-10 lg:flex-row ">
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl lg:text-5xl">
