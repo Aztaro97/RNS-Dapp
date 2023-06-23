@@ -115,18 +115,18 @@ interface WalletButtonProps {
 const WalletButton: FC<WalletButtonProps> = ({ title, img, onClick }) => {
   return (
     <Card onClick={onClick} className="cursor-pointer">
-      <CardContent className="flex flex-col items-center justify-center p-3 gap-2">
+      <CardContent className="flex flex-col items-center justify-center gap-2 p-3">
         <Image
           src={
             WalletIcon[title as keyof typeof WalletIcon].name === title &&
             WalletIcon[title as keyof typeof WalletIcon].img
           }
-          width={70}
-          height={70}
+          width={60}
+          height={60}
           alt={title}
           priority
         />
-        <h1 className="capitalize mb-0">{title}</h1>
+        <h1 className="mb-0 capitalize">{title}</h1>
       </CardContent>
     </Card>
   )
