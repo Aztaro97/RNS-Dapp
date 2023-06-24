@@ -23,7 +23,7 @@ export function SiteHeader() {
           <nav className="flex items-center space-x-2">
             <SearchInput />
             {isConnected ? <UserAvatar /> : <ConnectWallet />}
-            <NavShoppingCart />
+            {/* <NavShoppingCart /> */}
             <ThemeToggle />
           </nav>
         </div>
