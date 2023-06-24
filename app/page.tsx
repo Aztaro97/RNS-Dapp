@@ -10,7 +10,7 @@ export default function IndexPage() {
     <section className="py-20">
       <div className="flex flex-col items-center justify-between gap-10 lg:flex-row ">
         <div className="space-y-5">
-          <h1 className="text-3xl lg:text-5xl">
+          <h1 className="text-3xl font-bold lg:text-5xl">
             Claim Your Unique .router Domain Name Today
           </h1>
           <p>

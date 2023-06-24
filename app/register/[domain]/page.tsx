@@ -24,7 +24,7 @@ export default function RegisterPage() {
       <Card>
         <CardContent>
           <div className="flex flex-col items-center justify-between gap-5 my-5 md:flex-row">
-            <p className="text-2xl">Rami.route - {years} Year</p>
+            <p className="text-2xl">Rami.route - {years} Years</p>
             <SelectYears years={years} setYears={setYears} />
           </div>
 
@@ -44,7 +44,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="flex justify-end w-full">
-            <Button>Next</Button>
+            <Button>Checkout</Button>
           </div>
         </CardContent>
       </Card>
