@@ -11,7 +11,7 @@ export default function IndexPage() {
       <div className="flex flex-col items-center justify-between gap-10 lg:flex-row ">
         <div className="space-y-5">
           <h1 className="text-3xl font-bold lg:text-5xl">
-            Claim Your Unique .router Domain Name Today
+            Claim Your Unique <span className="text-[#CF088C]">.router</span> Domain Name Today
           </h1>
           <p>
             Discover your ideal .router domain name and establish a standout
