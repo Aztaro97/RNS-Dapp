@@ -7,11 +7,11 @@ import SearchInputDomain from "@/components/SearchInputDomain"
 
 export default function IndexPage() {
   return (
-    <section className="py-20">
+    <section className="py-10 md:py-20">
       <div className="flex flex-col items-center justify-between gap-10 lg:flex-row ">
         <div className="space-y-5">
           <h1 className="text-3xl font-bold lg:text-5xl">
-            Claim Your Unique <span className="text-[#CF088C]">.router</span> Domain Name Today
+            Claim Your Unique <span className="text-pink-700">.router</span> Domain Name Today
           </h1>
           <p>
             Discover your ideal .router domain name and establish a standout
@@ -25,6 +25,7 @@ export default function IndexPage() {
           width={800}
           height={800}
           alt="Banner Image"
+		  priority
         />
       </div>
     </section>

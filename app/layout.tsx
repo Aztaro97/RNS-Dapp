@@ -43,7 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <WagmiConfig config={configWagmi}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="flex flex-col min-h-screen">
+              <div className="flex flex-col max-h-screen min-h-screen">
                 <SiteHeader />
                 <div className="container flex-1 pt-10">{children}</div>
               </div>

@@ -124,7 +124,7 @@ const WalletButton: FC<WalletButtonProps> = ({ title, img, onClick }) => {
           width={60}
           height={60}
           alt={title}
-          priority
+          priority={true}
         />
         <h1 className="mb-0 capitalize">{title}</h1>
       </CardContent>

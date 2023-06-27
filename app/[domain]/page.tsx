@@ -6,6 +6,11 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  DomainProfileDetail,
+  DomainRecordDetail,
+  DomainSubNameDetail,
+} from "@/components/domainDetails"
 
 export default function DomainNamePage() {
   const [isCopy, setIsCopy] = useState<boolean>(false)
@@ -43,45 +48,21 @@ export default function DomainNamePage() {
         <TabsContent value="Profile">
           <Card>
             <CardContent>
-              <h1 className="text-3xl">Profile Section</h1>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit cubilia
-              etiam sagittis volutpat, curae sed cursus inceptos vehicula diam
-              odio accumsan eros laoreet, at neque lacus tempus imperdiet tellus
-              non mollis vitae tristique. Pellentesque cum id mus pulvinar
-              vulputate semper gravida suspendisse facilisis, potenti ac cras
-              erat congue quisque erat volutpat sem cras euismod, auctor mauris
-              porta sed diam a aliquet suscipit sapien montes morbi. Inceptos
-              curabitur nostra varius id e
+              <DomainProfileDetail />
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="Records">
           <Card>
             <CardContent>
-              <h1 className="text-3xl">Records Section</h1>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit cubilia
-              etiam sagittis volutpat, curae sed cursus inceptos vehicula diam
-              odio accumsan eros laoreet, at neque lacus tempus imperdiet tellus
-              non mollis vitae tristique. Pellentesque cum id mus pulvinar
-              vulputate semper gravida suspendisse facilisis, potenti ac cras
-              erat congue quisque luctus habitant, eu maecenas a felis nisl nam
-              suscipit ridiculus. Integer senectus nascetur pellentesque fusce
-              ut tortor ridiculus aenean q
+              <DomainRecordDetail />
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="SubName">
           <Card>
             <CardContent>
-              <h1 className="text-3xl">SubName Section</h1>
-              ristique. Pellentesque cum id mus pulvinar vulputate semper
-              gravida suspendisse facilisis, potenti ac cras erat congue quisque
-              luctus habitant, eu maecenas a felis nisl nam suscipit ridiculus.
-              Integer senectus nascetur pellentesque fusce ut tortor ridiculus
-              aenean quam dignissim mattis platea, vivamus quis dictum elementum
-              velit lacinia placerat volutpat sem cras euismod, auctor mauris
-              porta sed diam a aliquet suscipit sapien montes morbi. Inceptos
-              curabitur nostra varius id e
+              <DomainSubNameDetail />
             </CardContent>
           </Card>
         </TabsContent>

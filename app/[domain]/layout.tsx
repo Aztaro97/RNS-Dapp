@@ -5,5 +5,5 @@ interface RootLayoutProps {
 }
 
 export default function DomainLayout({ children }: RootLayoutProps) {
-  return <main className="max-w-2xl py-10 mx-auto">{children}</main>
+  return <main className="max-w-2xl mx-auto my-3 md:py-10">{children}</main>
 }
