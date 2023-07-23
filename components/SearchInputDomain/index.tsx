@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { SearchSchema } from "@/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, Form, useForm } from "react-hook-form"
+import { useDebounce } from "usehooks-ts"
 import { z } from "zod"
 
 import SearchInputResult from "../searchInput/searchInputResult"
@@ -15,16 +16,22 @@ const SearchInputDomain = () => {
     handleSubmit,
     control,
     watch,
+    getValues,
     formState: { errors },
   } = useForm<TInputForm>({
     resolver: zodResolver(SearchSchema),
   })
 
   const watchName = watch("name")
+  const debounceDomain = useDebounce<string>(getValues("name"), 500)
 
   const onSubmit = (data: TInputForm) => {
     console.log(data)
   }
+
+  useEffect(() => {
+    // Fetch domain Info
+  }, [debounceDomain])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

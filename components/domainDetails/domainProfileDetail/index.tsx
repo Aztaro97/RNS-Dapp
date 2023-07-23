@@ -25,11 +25,17 @@ const DomainProfileDetail = () => {
       </div>
 
       <div className="w-full space-y-3 md:col-span-2">
-        <WalletAddress label="ETH Address" address="taro.eth" />
-        <WalletAddress label="SOL Adress" address="0x9a88140c7cvfveddw...f43" />
+        <WalletAddress
+          label="ETH Address"
+          address="0x9a88140C742C3e5a9D7623f12A45Ba2366729f43"
+        />
+        <WalletAddress
+          label="Router Chain Address"
+          address="0x9a88140C742C3e5a9D7623f12A45Ba2366729f43"
+        />
         <WalletAddress
           label="Owner Address"
-          address="0x9a88140c7cvfveddw...f43"
+          address="0x9a88140C742C3e5a9D7623f12A45Ba2366729f43"
         />
       </div>
     </div>

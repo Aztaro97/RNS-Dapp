@@ -6,4 +6,5 @@ export { default as CoinbaseLogo } from "@/assets/svgs/coinbaseLogo.svg"
 export { default as WalletconnectLogo } from "@/assets/svgs/walletconnectLogo.svg"
 export { default as SafepalLogo } from "@/assets/svgs/safepalLogo.svg"
 export { default as LedgerLogo } from "@/assets/svgs/ledger.svg"
+export { default as NearLogo } from "@/assets/svgs/near-icon.svg"
 

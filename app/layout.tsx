@@ -6,6 +6,8 @@ import { configWagmi } from "@/config/configChain"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/toaster"
+import WalletContextProvider from "@/components/Wallet/context/wallet/ContextProvider"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -41,14 +43,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <WagmiConfig config={configWagmi}>
+          {/* <WagmiConfig config={configWagmi}> */}
+          <WalletContextProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="flex flex-col max-h-screen min-h-screen">
                 <SiteHeader />
                 <div className="container flex-1 pt-10">{children}</div>
               </div>
             </ThemeProvider>
-          </WagmiConfig>
+          </WalletContextProvider>
+          {/* </WagmiConfig> */}
+          <Toaster />
         </body>
       </html>
     </>

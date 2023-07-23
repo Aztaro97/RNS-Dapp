@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Files, List, LogOut, User, Wallet } from "lucide-react"
 import truncateEthAddress from "truncate-eth-address"
 import { useAccount, useDisconnect } from "wagmi"
 
+import { walletConfigs } from "../Wallet/configs/ProviderConfig"
+import { useAccountAddress, useWalletId, useWallets } from "../Wallet/hooks"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {
   DropdownMenu,
@@ -15,8 +17,17 @@ import {
 } from "../ui/dropdown-menu"
 
 const UserAvatar = () => {
-  const { disconnect } = useDisconnect()
-  const { address } = useAccount()
+//   const { disconnect } = useDisconnect()
+//   const { address } = useAccount()
+  const [walletId] = useWalletId()
+  const [accountAddress] = useAccountAddress()
+  const { handleDisconnect } = useWallets()
+
+  const wallet = useMemo(
+    () => walletConfigs.filter((wallet) => wallet.id === walletId)[0],
+    [walletId]
+  )
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +40,7 @@ const UserAvatar = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Wallet className="mr-2 h-4 w-4" />
-            <span>{truncateEthAddress(address!)}</span>
+            <span>{truncateEthAddress(accountAddress!)}</span>
             <DropdownMenuShortcut>
               <Files className="h-4 w-4" />
             </DropdownMenuShortcut>
@@ -48,7 +59,7 @@ const UserAvatar = () => {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => disconnect()}>
+          <DropdownMenuItem onClick={() => handleDisconnect(wallet)}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Sign Out</span>
           </DropdownMenuItem>

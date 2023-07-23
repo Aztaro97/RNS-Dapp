@@ -1,15 +1,45 @@
 "use client"
 
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
+import { useParams } from "next/navigation"
 import { Minus, Plus } from "lucide-react"
+import { useDebounce } from "usehooks-ts"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
+import { useWalletConnected } from "@/components/Wallet/hooks"
 import DomainPriceInfos from "@/components/domainPriceInfo"
 
 export default function RegisterPage() {
   const [years, setYears] = useState<number>(1)
+  const [isWalletConnected] = useWalletConnected()
+  const params = useParams()
+  const { toast } = useToast()
+  const queryDomain = params.domain.toLowerCase()
+
+  const debounceDomain = useDebounce<string>(queryDomain, 500)
+  console.log("queryDomain :", queryDomain)
+
+  const handleCheckOut = () => {
+    if (!isWalletConnected) {
+      toast({
+        title: "Please connect your wallet",
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Execute the checkout on smart contract
+  }
+
+  const onFetchDomainInfo = () => {}
+
+  useEffect(() => {
+    // Fetch domain Info
+    onFetchDomainInfo()
+  }, [debounceDomain])
+
   return (
     <section>
       <h1 className="mb-5 text-3xl">Registration</h1>
@@ -41,7 +71,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="flex justify-end w-full">
-            <Button>Checkout</Button>
+            <Button onClick={handleCheckOut}>Checkout</Button>
           </div>
         </CardContent>
       </Card>

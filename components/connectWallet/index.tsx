@@ -12,6 +12,8 @@ import {
 import { useConnect, useDisconnect } from "wagmi"
 import { InjectedConnector } from "wagmi/connectors/injected"
 
+import { walletConfigs } from "../Wallet/configs/ProviderConfig"
+import { useWalletConnected, useWallets } from "../Wallet/hooks"
 import { Button } from "../ui/button"
 import { Card, CardContent } from "../ui/card"
 import {
@@ -46,10 +48,18 @@ const WalletIcon = {
   },
 }
 
+declare global {
+  interface Window {
+    walletClient: any
+    // ethereum: any
+    frontier: any
+    cosmostation: any
+  }
+}
+
 const ConnectWallet = () => {
-  const { connect, connectors, isLoading, pendingConnector, error } =
-    useConnect()
-  const { disconnect } = useDisconnect()
+  const [isWalletConnected] = useWalletConnected()
+  const { handleConnect } = useWallets()
 
   return (
     <Dialog>
@@ -60,47 +70,17 @@ const ConnectWallet = () => {
         <DialogHeader>
           <DialogTitle>Connect Account</DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-2 gap-5">
+        {walletConfigs.map((wallet, index) => (
           <WalletButton
-            title={connectors[0].name}
-            img="wdwe"
-            onClick={() =>
-              connect({
-                connector: connectors[0],
-              })
-            }
+            key={index}
+            title={wallet.name}
+            img={wallet.logoUri}
+            onClick={() => {
+              handleConnect(wallet)
+            }}
           />
-          <WalletButton
-            title={connectors[1].name}
-            img="wdwe"
-            onClick={() =>
-              connect({
-                connector: connectors[1],
-              })
-            }
-          />
-          <WalletButton
-            title={connectors[2].name}
-            img="wdwe"
-            onClick={() =>
-              connect({
-                connector: connectors[2],
-              })
-            }
-          />
-          <WalletButton
-            title={connectors[3].name}
-            img="wdwe"
-            onClick={() =>
-              connect({
-                connector: connectors[3],
-              })
-            }
-          />
-        </div>
-
-        {/* <Button onClick={() => connectors()}>Metamast</Button> */}
-        {error && <p className="text-red-400">{error.message}</p>}
+        ))}
+        {/* {error && <p className="text-red-400">{error.message}</p>} */}
       </DialogContent>
     </Dialog>
   )
@@ -117,13 +97,10 @@ const WalletButton: FC<WalletButtonProps> = ({ title, img, onClick }) => {
     <Card onClick={onClick} className="cursor-pointer">
       <CardContent className="flex flex-col items-center justify-center gap-2 p-3">
         <Image
-          src={
-            WalletIcon[title as keyof typeof WalletIcon].name === title &&
-            WalletIcon[title as keyof typeof WalletIcon].img
-          }
+          src={img}
           width={60}
           height={60}
-          alt={title}
+          alt={"Wallet "}
           priority={true}
         />
         <h1 className="mb-0 capitalize">{title}</h1>
