@@ -165,11 +165,11 @@ export const getDataRaw = (accountAddress: string) =>
 		]
 	);
 //Router Txn
-export const getRouterExecutionArgs = (accountAddress: string) => {
+export const getRouterExecutionArgs = (accountAddress: string, networkId: string) => {
 	return {
 		ping: `Hello, Router From Wallet Module by ${accountAddress}`,
-		dest_contract_address: PING_PONG_ADDRESS["80001"],
-		dest_chain_id: "80001",
+		dest_contract_address: PING_PONG_ADDRESS[networkId],
+		dest_chain_id: networkId,
 		request_metadata: getRequestMetadataBase64(
 			DEFAULT_GAS_LIMIT,
 			DEFAULT_GAS_PRICE,

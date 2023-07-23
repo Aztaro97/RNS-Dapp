@@ -14,7 +14,6 @@ export const switchNetworkInMetamask = async (
 ) => {
   try {
     if (window.ethereum) {
-      console.log("CALLED");
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [config],

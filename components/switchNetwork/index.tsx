@@ -27,7 +27,7 @@ import {
 } from "../Wallet/hooks"
 import { WalletId } from "../Wallet/types"
 
-type TNetwork = "" | "Polygon" | "Router" | "Near"
+type TNetwork = "" | "Polygon" | "Router" | "Near" | "Avalanche" | "Goerli"
 
 const SwitchNetWork = () => {
   const [isWalletConnected] = useWalletConnected()
@@ -37,7 +37,7 @@ const SwitchNetWork = () => {
   const { handleSendTransaction } = useWallets()
   const [network, setNetwork] = useState<TNetwork>("")
 
-  const handleEvmTx = useCallback(async () => {
+  const handlePolygonEvm = useCallback(async () => {
     if (!isWalletConnected) {
       alert("Connect Wallet")
       return
@@ -49,6 +49,54 @@ const SwitchNetWork = () => {
     if (networkId !== "80001") {
       await window.walletClient.switchChain({
         id: 80001,
+      })
+      return
+    }
+    const txRespone = await handleSendTransaction({
+      from: accountAddress,
+      to: "0x862f75cb828b21c9a2f406eeb7f5263c1e012700",
+      value: "0",
+      data: getDataRaw(accountAddress),
+    })
+    console.log("txRespone evm =>", txRespone)
+  }, [isWalletConnected, walletId, networkId, accountAddress])
+
+  const handleAvalancheEvm = useCallback(async () => {
+    if (!isWalletConnected) {
+      alert("Connect Wallet")
+      return
+    }
+    if (walletId === WalletId.near) {
+      alert("Connect to EVM wallet")
+      return
+    }
+    if (networkId !== "43113") {
+      await window.walletClient.switchChain({
+        id: 43113,
+      })
+      return
+    }
+    const txRespone = await handleSendTransaction({
+      from: accountAddress,
+      to: "0x862f75cb828b21c9a2f406eeb7f5263c1e012700",
+      value: "0",
+      data: getDataRaw(accountAddress),
+    })
+    console.log("txRespone evm =>", txRespone)
+  }, [isWalletConnected, walletId, networkId, accountAddress])
+
+  const handleEthereumEvm = useCallback(async () => {
+    if (!isWalletConnected) {
+      alert("Connect Wallet")
+      return
+    }
+    if (walletId === WalletId.near) {
+      alert("Connect to EVM wallet")
+      return
+    }
+    if (networkId !== "5") {
+      await window.walletClient.switchChain({
+        id: 5,
       })
       return
     }
@@ -78,7 +126,7 @@ const SwitchNetWork = () => {
       routerNetworkEnv: "testnet",
       routerContractAddress: PING_PONG_ADDRESS[ROUTER_COSMOS_CHAIN_ID],
       routerExecuteMsg: {
-        i_ping: getRouterExecutionArgs(accountAddress),
+        i_ping: getRouterExecutionArgs(accountAddress, networkId),
       },
       routerNodeUrl: ROUTER_LCD,
     })
@@ -98,24 +146,34 @@ const SwitchNetWork = () => {
       alert("Connect to Near Testnet")
       return
     }
-    const txResponse = await handleSendTransaction({
-      methodName: "i_ping",
-      args: getNearExecutionArgs(accountAddress),
-      gas: "30000000000000",
-      deposit: "10000000000000000000000",
-    })
-    console.log("txResponse near=>", txResponse)
+    // const txResponse = await handleSendTransaction({
+    //   methodName: "i_ping",
+    //   args: getNearExecutionArgs(accountAddress),
+    //   gas: "30000000000000",
+    //   deposit: "10000000000000000000000",
+    // })
+    // console.log("txResponse near=>", txResponse)
   }, [isWalletConnected, walletId, networkId, accountAddress])
 
   const onChangeSelect = (val: TNetwork) => {
-    if (val === "Polygon") {
-      handleEvmTx()
-    }
-    if (val === "Router") {
-      handleRouterTx()
-    }
-    if (val === "Near") {
-      handleNearTx()
+    switch (val) {
+      case "Polygon":
+        handlePolygonEvm()
+        break
+      case "Router":
+        handleRouterTx()
+        break
+      case "Near":
+        handleNearTx()
+        break
+      case "Avalanche":
+        handleAvalancheEvm()
+        break
+      case "Goerli":
+        handleEthereumEvm()
+        break
+      default:
+        break
     }
     setNetwork(val)
     console.log("val : ", val)
@@ -124,13 +182,15 @@ const SwitchNetWork = () => {
   return (
     <Select onValueChange={onChangeSelect}>
       <SelectTrigger className="w-[250px]">
-        <SelectValue placeholder="Select a Network" />
+        <SelectValue placeholder="Select Network" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Network</SelectLabel>
           <SelectItem value="Polygon">Polygon Mumbai</SelectItem>
           <SelectItem value="Router">Router Chain</SelectItem>
+          <SelectItem value="Goerli">Ethereum Goerli</SelectItem>
+          <SelectItem value="Avalanche">Avalanche Fuji</SelectItem>
           <SelectItem value="Near">Near Chain</SelectItem>
         </SelectGroup>
       </SelectContent>
