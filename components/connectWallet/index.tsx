@@ -2,15 +2,6 @@
 
 import React, { FC } from "react"
 import Image from "next/image"
-import {
-  CoinbaseLogo,
-  LedgerLogo,
-  MetamaskLogo,
-  SafepalLogo,
-  WalletconnectLogo,
-} from "@/assets"
-import { useConnect, useDisconnect } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
 
 import { walletConfigs } from "../Wallet/configs/ProviderConfig"
 import { useWalletConnected, useWallets } from "../Wallet/hooks"
@@ -24,29 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog"
-
-const WalletIcon = {
-  MetaMask: {
-    img: MetamaskLogo,
-    name: "MetaMask",
-  },
-  WalletConnect: {
-    img: WalletconnectLogo,
-    name: "WalletConnect",
-  },
-  "Coinbase Wallet": {
-    img: CoinbaseLogo,
-    name: "Coinbase Wallet",
-  },
-  //   Safe: {
-  //     img: SafepalLogo,
-  //     name: "Safe",
-  //   },
-  Ledger: {
-    img: LedgerLogo,
-    name: "Ledger",
-  },
-}
 
 declare global {
   interface Window {

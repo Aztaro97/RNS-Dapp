@@ -12,7 +12,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import UserAvatar from "@/components/userAvatar"
 
 import { useWalletConnected } from "./Wallet/hooks"
-import SwitchNetWork from "./switchNetwork"
+import SelectNetWork from "./selectNetwork"
 
 export function SiteHeader() {
   //   const { isConnected } = useAccount()
@@ -21,14 +21,13 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex items-center h-16 space-x-4 sm:justify-between sm:space-x-0">
         <Link href="/" className="flex items-center space-x-2">
-          <Icons.logo className="h-6 w-6" />
+          <Icons.ethereum className="h-6 w-6" />
           <span className="inline-block font-bold">{siteConfig.name}</span>
         </Link>
         <div className="flex items-center justify-end flex-1 space-x-4">
           <nav className="flex items-center space-x-2">
             <SearchInput />
-            
-            {isWalletConnected ? <SwitchNetWork /> : null}
+            {isWalletConnected ? <SelectNetWork /> : null}
             {isWalletConnected ? <UserAvatar /> : <ConnectWallet />}
             {/* <NavShoppingCart /> */}
             <ThemeToggle />
